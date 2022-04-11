@@ -16,8 +16,8 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS =>
   json_encode([
     "userId" => $phone,
-    "fromTime" => time()-3600,
-    "toTime" => time(),
+    "fromTime" => (time()-3600)*1000,
+    "toTime" => time()*1000,
     "limit" => 100,
     "cursor" => ""
   ]),
