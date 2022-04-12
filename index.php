@@ -1,6 +1,8 @@
 <?php
-$phone = "";
-$token = "";
+error_reporting(0);
+header('Content-type: application/json');
+$phone = $_GET['phone'];
+$token = $_GET['token'];
 
 
 $curl = curl_init();
@@ -16,7 +18,7 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS =>
   json_encode([
     "userId" => $phone,
-    "fromTime" => (time()-3600)*1000,
+    "fromTime" => (time()-86400)*1000,
     "toTime" => time()*1000,
     "limit" => 100,
     "cursor" => ""
@@ -48,5 +50,4 @@ foreach($response->message->data->notifications as $key => $data )
   }
 }
 
-echo json_encode($arr);
-
+echo json_encode($arr, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
